@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Repository
-public class GameRepository implements Repository<Game, Long> {
+public class GameRepository implements Repository<Game, String> {
     private DataStore dataStore;
 
     @Autowired
@@ -23,8 +23,8 @@ public class GameRepository implements Repository<Game, Long> {
     }
 
     @Override
-    public Optional<Game> findByKey(Long id) {
-        return dataStore.fetchGames().filter(game -> game.getId().equals(id)).findFirst();
+    public Optional<Game> findByKey(String id) {
+        return dataStore.fetchGames().filter(game -> game.getName().equals(id)).findFirst();
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Repository
-public class StreamerRepository implements Repository<Streamer, Long>{
+public class StreamerRepository implements Repository<Streamer, String>{
     private DataStore dataStore;
 
     @Autowired
@@ -23,9 +23,19 @@ public class StreamerRepository implements Repository<Streamer, Long>{
         return dataStore.fetchStreamers().collect(Collectors.toList());
     }
 
+    public List<Streamer> findAllByGame(String gameName){
+        return dataStore
+                .fetchStreamers()
+                .filter(streamer -> streamer
+                        .getPlayedGames()
+                        .stream()
+                        .anyMatch(game -> game.getName().equals(gameName))
+                ).collect(Collectors.toList());
+    }
+
     @Override
-    public Optional<Streamer> findByKey(Long id) {
-        return dataStore.fetchStreamers().filter(streamer -> streamer.getId().equals(id)).findFirst();
+    public Optional<Streamer> findByKey(String id) {
+        return dataStore.fetchStreamers().filter(streamer -> streamer.getName().equals(id)).findFirst();
     }
 
     @Override

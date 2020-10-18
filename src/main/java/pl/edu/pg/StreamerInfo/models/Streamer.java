@@ -12,7 +12,6 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Streamer {
-    private Long id;
     private String name;
     private String description;
     @ToString.Exclude
