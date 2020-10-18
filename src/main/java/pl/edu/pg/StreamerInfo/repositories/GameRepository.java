@@ -1,15 +1,44 @@
 package pl.edu.pg.StreamerInfo.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import pl.edu.pg.StreamerInfo.datastore.DataStore;
+import pl.edu.pg.StreamerInfo.models.Game;
 
-@Repository
-public class GameRepository {
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@org.springframework.stereotype.Repository
+public class GameRepository implements Repository<Game, Long> {
     private DataStore dataStore;
 
     @Autowired
     public GameRepository(DataStore dataStore){
         this.dataStore = dataStore;
+    }
+
+    @Override
+    public List<Game> findAll() {
+        return dataStore.fetchGames().collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Game> findByKey(Long id) {
+        return dataStore.fetchGames().filter(game -> game.getId().equals(id)).findFirst();
+    }
+
+    @Override
+    public void add(Game entity) {
+        dataStore.addGame(entity);
+    }
+
+    @Override
+    public void update(Game entity) {
+        dataStore.updateGame(entity);
+    }
+
+    @Override
+    public void delete(Game entity) {
+        dataStore.deleteGame(entity);
     }
 }
