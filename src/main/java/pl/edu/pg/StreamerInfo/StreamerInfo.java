@@ -1,13 +1,13 @@
-package pl.edu.pg.auilabstreamerinfo;
+package pl.edu.pg.StreamerInfo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AuiLabStreamerInfoApplication {
+public class StreamerInfo {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuiLabStreamerInfoApplication.class, args);
+        SpringApplication.run(StreamerInfo.class, args);
     }
 
 }

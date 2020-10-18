@@ -1,10 +1,10 @@
-package pl.edu.pg.auilabstreamerinfo;
+package pl.edu.pg.StreamerInfo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuiLabStreamerInfoApplicationTests {
+class StreamerInfoTests {
 
     @Test
     void contextLoads() {
