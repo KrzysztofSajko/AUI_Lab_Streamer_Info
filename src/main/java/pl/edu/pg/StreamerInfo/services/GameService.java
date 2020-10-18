@@ -3,6 +3,7 @@ package pl.edu.pg.StreamerInfo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pg.StreamerInfo.models.Game;
+import pl.edu.pg.StreamerInfo.models.Genre;
 import pl.edu.pg.StreamerInfo.repositories.GameRepository;
 
 import java.util.List;
@@ -19,6 +20,10 @@ public class GameService {
 
     public List<Game> findAll(){
         return repository.findAll();
+    }
+
+    public List<Game> findAll(Genre genre){
+        return repository.findAllByGenre(genre);
     }
 
     public Optional<Game> find(String name){

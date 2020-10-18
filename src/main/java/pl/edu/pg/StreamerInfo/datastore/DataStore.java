@@ -2,6 +2,7 @@ package pl.edu.pg.StreamerInfo.datastore;
 
 import org.springframework.stereotype.Component;
 import pl.edu.pg.StreamerInfo.models.Game;
+import pl.edu.pg.StreamerInfo.models.Genre;
 import pl.edu.pg.StreamerInfo.models.Streamer;
 
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 public class DataStore {
     private Set<Game> games = new HashSet<>();
     private Set<Streamer> streamers = new HashSet<>();
+    private Set<Genre> genres = new HashSet<>();
 
     public synchronized Stream<Game> fetchGames(){
         return games.stream();
@@ -23,7 +25,7 @@ public class DataStore {
 
     public synchronized void updateGame(Game game){
         fetchGames()
-                .filter(origin -> origin.getId().equals(game.getId()))
+                .filter(origin -> origin.getName().equals(game.getName()))
                 .findFirst()
                 .ifPresent(original ->{
                     games.remove(original);
@@ -45,7 +47,7 @@ public class DataStore {
 
     public synchronized void updateStreamer(Streamer streamer){
         fetchStreamers()
-                .filter(origin -> origin.getId().equals(streamer.getId()))
+                .filter(origin -> origin.getName().equals(streamer.getName()))
                 .findFirst()
                 .ifPresent(original ->{
                     streamers.remove(original);
@@ -55,6 +57,28 @@ public class DataStore {
 
     public synchronized void deleteStreamer(Streamer streamer){
         streamers.remove(streamer);
+    }
+
+    public synchronized Stream<Genre> fetchGenres(){
+        return genres.stream();
+    }
+
+    public synchronized void addGenre(Genre genre){
+        genres.add(genre);
+    }
+
+    public synchronized void updateGenre(Genre genre){
+        fetchGenres()
+                .filter(origin -> origin.getName().equals(genre.getName()))
+                .findFirst()
+                .ifPresent(original ->{
+                    genres.remove(original);
+                    genres.add(genre);
+                });
+    }
+
+    public synchronized void deleteGenre(Genre genre){
+        genres.remove(genre);
     }
 
 }

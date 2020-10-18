@@ -9,9 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class Game {
+public class Genre {
     private String name;
-    private String abbreviation;
     private String description;
-    private Genre genre;
 }

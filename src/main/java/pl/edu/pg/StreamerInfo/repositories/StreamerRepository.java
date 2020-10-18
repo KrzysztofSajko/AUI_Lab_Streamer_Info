@@ -2,6 +2,8 @@ package pl.edu.pg.StreamerInfo.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.edu.pg.StreamerInfo.datastore.DataStore;
+import pl.edu.pg.StreamerInfo.models.Game;
+import pl.edu.pg.StreamerInfo.models.Genre;
 import pl.edu.pg.StreamerInfo.models.Streamer;
 
 import java.util.List;
@@ -20,22 +22,42 @@ public class StreamerRepository implements Repository<Streamer, String>{
 
     @Override
     public List<Streamer> findAll() {
-        return dataStore.fetchStreamers().collect(Collectors.toList());
+        return dataStore
+                .fetchStreamers()
+                .collect(Collectors.toList());
     }
 
-    public List<Streamer> findAllByGame(String gameName){
+    public List<Streamer> findAllByGame(Game game){
         return dataStore
                 .fetchStreamers()
                 .filter(streamer -> streamer
                         .getPlayedGames()
                         .stream()
-                        .anyMatch(game -> game.getName().equals(gameName))
-                ).collect(Collectors.toList());
+                        .anyMatch(playedGame -> playedGame
+                                .equals(game)))
+                .collect(Collectors.toList());
+    }
+
+    public List<Streamer> findAllByGenre(Genre genre){
+        return dataStore
+                .fetchStreamers()
+                .filter(streamer -> streamer
+                        .getPlayedGames()
+                        .stream()
+                        .anyMatch(playedGame -> playedGame
+                                .getGenre()
+                                .equals(genre)))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Streamer> findByKey(String id) {
-        return dataStore.fetchStreamers().filter(streamer -> streamer.getName().equals(id)).findFirst();
+        return dataStore
+                .fetchStreamers()
+                .filter(streamer -> streamer
+                        .getName()
+                        .equals(id))
+                .findFirst();
     }
 
     @Override
