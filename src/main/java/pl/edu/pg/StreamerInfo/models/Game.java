@@ -10,4 +10,8 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class Game {
+    private Long id;
+    private String name;
+    private String description;
+    private String genre;
 }
