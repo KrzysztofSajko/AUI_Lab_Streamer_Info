@@ -7,6 +7,7 @@ import pl.edu.pg.StreamerInfo.models.Genre;
 import pl.edu.pg.StreamerInfo.models.Streamer;
 import pl.edu.pg.StreamerInfo.repositories.StreamerRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,17 +33,20 @@ public class StreamerService {
     }
 
     public Optional<Streamer> find(String name){
-        return repository.findByKey(name);
+        return repository.findById(name);
     }
 
+    @Transactional
     public void add(Streamer streamer){
-        repository.add(streamer);
+        repository.save(streamer);
     }
 
+    @Transactional
     public void update(Streamer streamer){
-        repository.update(streamer);
+        repository.save(streamer);
     }
 
+    @Transactional
     public void delete(Streamer streamer){
         repository.delete(streamer);
     }

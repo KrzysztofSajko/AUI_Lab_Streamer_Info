@@ -4,7 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -24,5 +24,5 @@ public class Game {
     private Genre genre;
     @ManyToMany(mappedBy = "playedGames")
     @ToString.Exclude
-    private List<Streamer> streamers;
+    private Set<Streamer> streamers;
 }

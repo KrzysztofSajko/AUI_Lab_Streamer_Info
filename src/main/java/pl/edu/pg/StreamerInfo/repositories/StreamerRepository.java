@@ -1,77 +1,22 @@
 package pl.edu.pg.StreamerInfo.repositories;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import pl.edu.pg.StreamerInfo.datastore.DataStore;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
 import pl.edu.pg.StreamerInfo.models.Game;
 import pl.edu.pg.StreamerInfo.models.Genre;
 import pl.edu.pg.StreamerInfo.models.Streamer;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-@org.springframework.stereotype.Repository
-public class StreamerRepository implements Repository<Streamer, String>{
-    private DataStore dataStore;
+@Repository
+public interface StreamerRepository extends JpaRepository<Streamer, String> {
 
-    @Autowired
-    public StreamerRepository(DataStore dataStore){
-        this.dataStore = dataStore;
-    }
+    @Query("select s from Streamer s join s.playedGames g where g = :game")
+    List<Streamer> findAllByGame(@Param("game") Game game);
 
-
-    @Override
-    public List<Streamer> findAll() {
-        return dataStore
-                .fetchStreamers()
-                .collect(Collectors.toList());
-    }
-
-    public List<Streamer> findAllByGame(Game game){
-        return dataStore
-                .fetchStreamers()
-                .filter(streamer -> streamer
-                        .getPlayedGames()
-                        .stream()
-                        .anyMatch(playedGame -> playedGame
-                                .equals(game)))
-                .collect(Collectors.toList());
-    }
-
-    public List<Streamer> findAllByGenre(Genre genre){
-        return dataStore
-                .fetchStreamers()
-                .filter(streamer -> streamer
-                        .getPlayedGames()
-                        .stream()
-                        .anyMatch(playedGame -> playedGame
-                                .getGenre()
-                                .equals(genre)))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public Optional<Streamer> findByKey(String id) {
-        return dataStore
-                .fetchStreamers()
-                .filter(streamer -> streamer
-                        .getName()
-                        .equals(id))
-                .findFirst();
-    }
-
-    @Override
-    public void add(Streamer entity) {
-        dataStore.addStreamer(entity);
-    }
-
-    @Override
-    public void update(Streamer entity) {
-        dataStore.updateStreamer(entity);
-    }
-
-    @Override
-    public void delete(Streamer entity) {
-        dataStore.deleteStreamer(entity);
-    }
+    @Query("select s from Streamer s join s.playedGames g join g.genre gen where gen = :genre")
+    List<Streamer> findAllByGenre(@Param("genre") Genre genre);
 }

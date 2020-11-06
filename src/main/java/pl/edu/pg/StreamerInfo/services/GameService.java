@@ -6,6 +6,7 @@ import pl.edu.pg.StreamerInfo.models.Game;
 import pl.edu.pg.StreamerInfo.models.Genre;
 import pl.edu.pg.StreamerInfo.repositories.GameRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,17 +28,20 @@ public class GameService {
     }
 
     public Optional<Game> find(String name){
-        return repository.findByKey(name);
+        return repository.findById(name);
     }
 
+    @Transactional
     public void add(Game game){
-        repository.add(game);
+        repository.save(game);
     }
 
+    @Transactional
     public void update(Game game){
-        repository.update(game);
+        repository.save(game);
     }
 
+    @Transactional
     public void delete(Game game){
         repository.delete(game);
     }

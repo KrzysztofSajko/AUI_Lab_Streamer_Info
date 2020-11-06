@@ -6,6 +6,7 @@ import pl.edu.pg.StreamerInfo.models.Game;
 import pl.edu.pg.StreamerInfo.models.Genre;
 import pl.edu.pg.StreamerInfo.repositories.GenreRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,17 +24,20 @@ public class GenreService {
     }
 
     public Optional<Genre> find(String name){
-        return repository.findByKey(name);
+        return repository.findById(name);
     }
 
+    @Transactional
     public void add(Genre genre){
-        repository.add(genre);
+        repository.save(genre);
     }
 
+    @Transactional
     public void update(Genre genre){
-        repository.update(genre);
+        repository.save(genre);
     }
 
+    @Transactional
     public void delete(Genre genre){
         repository.delete(genre);
     }

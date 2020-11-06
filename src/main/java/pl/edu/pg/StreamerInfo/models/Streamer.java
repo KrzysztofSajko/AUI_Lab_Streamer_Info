@@ -4,7 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -25,5 +25,5 @@ public class Streamer {
             inverseJoinColumns = @JoinColumn(name = "playedGame")
     )
     @ToString.Exclude
-    private List<Game> playedGames;
+    private Set<Game> playedGames;
 }
