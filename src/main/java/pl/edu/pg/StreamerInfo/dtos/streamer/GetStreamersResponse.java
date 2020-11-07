@@ -22,6 +22,7 @@ public class GetStreamersResponse {
     @ToString
     @EqualsAndHashCode
     public static class Streamer{
+        private Long id;
         private String name;
     }
 
@@ -34,6 +35,7 @@ public class GetStreamersResponse {
           GetStreamersResponseBuilder responseBuilder = GetStreamersResponse.builder();
           streamers.stream()
                   .map(streamer -> Streamer.builder()
+                          .id(streamer.getId())
                           .name(streamer.getName())
                           .build())
                   .forEach(responseBuilder::streamer);

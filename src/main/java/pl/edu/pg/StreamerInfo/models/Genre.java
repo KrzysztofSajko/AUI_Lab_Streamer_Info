@@ -3,10 +3,7 @@ package pl.edu.pg.StreamerInfo.models;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Setter
@@ -19,10 +16,14 @@ import java.util.List;
 @Table(name = "genres")
 public class Genre {
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long id;
     private String name;
     private String description;
+
     @OneToMany(mappedBy = "genre")
     @ToString.Exclude
     @Singular
+    @EqualsAndHashCode.Exclude
     private List<Game> games;
 }

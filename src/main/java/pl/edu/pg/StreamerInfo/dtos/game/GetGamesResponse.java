@@ -23,6 +23,7 @@ public class GetGamesResponse {
     @ToString
     @EqualsAndHashCode
     public static class Game{
+        private Long id;
         private String name;
     }
 
@@ -35,6 +36,7 @@ public class GetGamesResponse {
           GetGamesResponseBuilder responseBuilder = GetGamesResponse.builder();
           games.stream()
                   .map(game -> Game.builder()
+                          .id(game.getId())
                           .name(game.getName())
                           .build())
                   .forEach(responseBuilder::game);

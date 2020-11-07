@@ -31,7 +31,7 @@ public class StreamerController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<GetStreamerResponse> getStreamer(@PathVariable("id") String id){
+    public ResponseEntity<GetStreamerResponse> getStreamer(@PathVariable("id") Long id){
         return streamerService.find(id)
                 .map(value -> ResponseEntity.ok(GetStreamerResponse
                         .entityToDtoMapper()
@@ -49,7 +49,7 @@ public class StreamerController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateStreamer(@RequestBody UpdateStreamerRequest request, @PathVariable("id") String id){
+    public ResponseEntity<Void> updateStreamer(@RequestBody UpdateStreamerRequest request, @PathVariable("id") Long id){
         var streamer = streamerService.find(id);
         if (streamer.isPresent()){
             UpdateStreamerRequest.dtoToEntityMapper(name -> gameService.find(name).orElseThrow()).apply(streamer.get(), request);
@@ -62,7 +62,7 @@ public class StreamerController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteStreamer(@PathVariable("id") String id){
+    public ResponseEntity<Void> deleteStreamer(@PathVariable("id") Long id){
         var streamer = streamerService.find(id);
         if (streamer.isPresent()){
             streamerService.delete(streamer.get());

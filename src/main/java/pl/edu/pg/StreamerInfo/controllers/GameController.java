@@ -31,7 +31,7 @@ public class GameController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<GetGameResponse> getGame(@PathVariable("id") String id){
+    public ResponseEntity<GetGameResponse> getGame(@PathVariable("id") long id){
         return gameService.find(id)
                 .map(value -> ResponseEntity.ok(GetGameResponse
                         .entityToDtoMapper()
@@ -49,7 +49,7 @@ public class GameController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateGame(@RequestBody UpdateGameRequest request, @PathVariable("id") String id){
+    public ResponseEntity<Void> updateGame(@RequestBody UpdateGameRequest request, @PathVariable("id") long id){
         var game = gameService.find(id);
         if (game.isPresent()){
             UpdateGameRequest.dtoToEntityMapper(name -> genreService.find(name).orElseThrow()).apply(game.get(), request);
@@ -62,7 +62,7 @@ public class GameController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteGame(@PathVariable("id") String id){
+    public ResponseEntity<Void> deleteGame(@PathVariable("id") long id){
         var game = gameService.find(id);
         if (game.isPresent()){
             gameService.delete(game.get());

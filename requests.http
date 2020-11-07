@@ -1,0 +1,34 @@
+GET http://localhost:8080/api/games
+
+###
+
+GET http://localhost:8080/api/genres
+
+###
+
+GET http://localhost:8080/api/streamers
+
+###
+
+GET http://localhost:8080/api/streamers/17
+
+###
+
+GET http://localhost:8080/api/genres/4
+
+###
+
+GET http://localhost:8080/api/games/13
+
+
+###
+
+POST http://localhost:8080/api/genres
+Content-Type: application/json
+
+{
+  "name": "genre1",
+  "desription": "description description description"
+}
+
+###

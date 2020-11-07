@@ -16,6 +16,8 @@ import java.util.Set;
 @Table(name = "streamers")
 public class Streamer {
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long id;
     private String name;
     private String description;
     @ManyToMany
@@ -25,6 +27,7 @@ public class Streamer {
             inverseJoinColumns = @JoinColumn(name = "playedGame")
     )
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Singular
     private Set<Game> playedGames;
 }

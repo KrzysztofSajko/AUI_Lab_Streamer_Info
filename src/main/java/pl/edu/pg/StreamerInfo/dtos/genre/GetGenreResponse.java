@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @ToString
 @EqualsAndHashCode
 public class GetGenreResponse {
+    private Long id;
     private String name;
     private String description;
     @Singular
@@ -24,6 +25,7 @@ public class GetGenreResponse {
 
     public static Function<Genre, GetGenreResponse> entityToDtoMapper(){
         return genre -> GetGenreResponse.builder()
+                .id(genre.getId())
                 .name(genre.getName())
                 .description(genre.getDescription())
                 .games(genre.getGames()

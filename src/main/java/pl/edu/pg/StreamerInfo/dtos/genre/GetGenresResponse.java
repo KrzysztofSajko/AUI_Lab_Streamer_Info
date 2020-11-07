@@ -22,6 +22,7 @@ public class GetGenresResponse {
     @ToString
     @EqualsAndHashCode
     public static class Genre{
+        private Long id;
         private String name;
     }
 
@@ -34,6 +35,7 @@ public class GetGenresResponse {
             GetGenresResponseBuilder responseBuilder = GetGenresResponse.builder();
             genres.stream()
                     .map(genre -> Genre.builder()
+                            .id(genre.getId())
                             .name(genre.getName())
                             .build())
                     .forEach(responseBuilder::genre);

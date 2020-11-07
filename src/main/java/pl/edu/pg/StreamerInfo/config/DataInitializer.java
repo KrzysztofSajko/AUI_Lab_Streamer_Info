@@ -1,4 +1,4 @@
-package pl.edu.pg.StreamerInfo;
+package pl.edu.pg.StreamerInfo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -74,6 +74,12 @@ public class DataInitializer {
                 .build();
         genreService.create(cardGame);
 
+        var socialDeductionGame = Genre.builder()
+                .name("Social Deduction Game")
+                .description("Game where players are in a group, some of those players are chosen to actively sabotage the rest. Players try to figure out who is sabotaging before its too late.")
+                .build();
+        genreService.create(socialDeductionGame);
+
         // init games
         var wow = Game.builder()
                 .name("World of Warcraft")
@@ -107,21 +113,41 @@ public class DataInitializer {
                 .build();
         gameService.create(tesSkyrim);
 
+        var amongUs = Game.builder()
+                .name("Among Us")
+                .abbreviation("among")
+                .genre(socialDeductionGame)
+                .description("Among the crew there are impostors, crewmates have to find out who they are and get rid of them or try to finish their task before all of them get murdered.")
+                .build();
+        gameService.create(amongUs);
+
         // init streamers
         var black = Streamer.builder()
                 .name("BlackFireIce")
                 .description("Mostly strategy oriented games, e-sports commentator.")
-                .playedGames(new HashSet<>(
-                        Set.of(hs, tft)))
+                .playedGames(new HashSet<>(Set.of(hs, tft)))
                 .build();
         streamerService.create(black);
 
         var jdotb = Streamer.builder()
                 .name("jdotb")
                 .description("World class wow m+ healer, known for showing his chest hair on streams to his audience content.")
-                .playedGames(new HashSet<>(
-                        Set.of(wow)))
+                .playedGames(new HashSet<>(Set.of(wow)))
                 .build();
         streamerService.create(jdotb);
+
+        var sco = Streamer.builder()
+                .name("Sco")
+                .description("World class tank, multiple R2WF winner, gm of Method guild and founder of Method gaming org.")
+                .playedGames(new HashSet<>(Set.of(wow)))
+                .build();
+        streamerService.create(sco);
+
+        var jorbs = Streamer.builder()
+                .name("Jorbs")
+                .description("Big brain dude, 200 iq plays are a norm for him")
+                .playedGames(new HashSet<>(Set.of(amongUs, hs)))
+                .build();
+        streamerService.create(jorbs);
     }
 }

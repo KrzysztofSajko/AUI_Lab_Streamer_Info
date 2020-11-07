@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @ToString
 @EqualsAndHashCode
 public class GetStreamerResponse {
+    private Long id;
     private String name;
     private String description;
     @Singular
@@ -23,6 +24,7 @@ public class GetStreamerResponse {
     private List<String> playedGames;
     public static Function <Streamer, GetStreamerResponse> entityToDtoMapper(){
         return streamer -> GetStreamerResponse.builder()
+                .id(streamer.getId())
                 .name(streamer.getName())
                 .description(streamer.getDescription())
                 .playedGames(streamer.getPlayedGames()

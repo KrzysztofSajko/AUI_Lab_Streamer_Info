@@ -29,7 +29,7 @@ public class GenreController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<GetGenreResponse> getGenre(@PathVariable("id") String id){
+    public ResponseEntity<GetGenreResponse> getGenre(@PathVariable("id") Long id){
         return genreService.find(id)
                 .map(value -> ResponseEntity.ok(GetGenreResponse
                         .entityToDtoMapper()
@@ -47,7 +47,7 @@ public class GenreController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateGenre(@RequestBody UpdateGenreRequest request, @PathVariable("id") String id){
+    public ResponseEntity<Void> updateGenre(@RequestBody UpdateGenreRequest request, @PathVariable("id") Long id){
         var genre = genreService.find(id);
         if (genre.isPresent()){
             UpdateGenreRequest.dtoToEntityMapper().apply(genre.get(), request);
@@ -60,7 +60,7 @@ public class GenreController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteGenre(@PathVariable("id") String id){
+    public ResponseEntity<Void> deleteGenre(@PathVariable("id") Long id){
         var genre = genreService.find(id);
         if (genre.isPresent()){
             genreService.delete(genre.get());

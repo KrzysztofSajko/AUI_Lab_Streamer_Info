@@ -27,9 +27,11 @@ public class GameService {
         return repository.findAllByGenre(genre);
     }
 
-    public Optional<Game> find(String name){
-        return repository.findById(name);
+    public Optional<Game> find(Long id){
+        return repository.findById(id);
     }
+
+    public Optional<Game> find(String name) { return repository.findByName(name);}
 
     @Transactional
     public Game create(Game game){

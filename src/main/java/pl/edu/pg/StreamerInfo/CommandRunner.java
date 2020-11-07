@@ -118,6 +118,5 @@ public class CommandRunner implements CommandLineRunner {
             }
         }while (!cmd.equals("exit"));
         System.out.println("Exiting...");
-//        genreService.findAll().forEach(System.out::println);
     }
 }

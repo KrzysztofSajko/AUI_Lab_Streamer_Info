@@ -16,14 +16,20 @@ import java.util.Set;
 @Table(name = "games")
 public class Game {
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long id;
     private String name;
     private String abbreviation;
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "genre")
+    @EqualsAndHashCode.Exclude
     private Genre genre;
+
     @ManyToMany(mappedBy = "playedGames")
     @ToString.Exclude
     @Singular
+    @EqualsAndHashCode.Exclude
     private Set<Streamer> streamers;
 }

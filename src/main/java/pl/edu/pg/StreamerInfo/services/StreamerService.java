@@ -40,8 +40,8 @@ public class StreamerService {
         return repository.findAllByGenre(genreName);
     }
 
-    public Optional<Streamer> find(String name){
-        return repository.findById(name);
+    public Optional<Streamer> find(Long id){
+        return repository.findById(id);
     }
 
     @Transactional

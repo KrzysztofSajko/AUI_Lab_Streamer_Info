@@ -22,9 +22,11 @@ public class GenreService {
         return repository.findAll();
     }
 
-    public Optional<Genre> find(String name){
-        return repository.findById(name);
+    public Optional<Genre> find(Long id){
+        return repository.findById(id);
     }
+
+    public Optional<Genre> find(String name) {return repository.findByName(name); }
 
     @Transactional
     public Genre create(Genre genre){

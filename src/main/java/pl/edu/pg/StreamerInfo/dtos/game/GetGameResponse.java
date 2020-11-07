@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @ToString
 @EqualsAndHashCode
 public class GetGameResponse {
+    private Long id;
     private String name;
     private String abbreviation;
     private String description;
@@ -27,6 +28,7 @@ public class GetGameResponse {
 
     public static Function<Game, GetGameResponse> entityToDtoMapper(){
         return game -> GetGameResponse.builder()
+                .id(game.getId())
                 .name(game.getName())
                 .abbreviation(game.getAbbreviation())
                 .description(game.getDescription())
