@@ -15,7 +15,7 @@ import java.util.function.BiFunction;
 public class UpdateGenreRequest {
     private String description;
 
-    public static BiFunction<Genre, UpdateGenreRequest, Genre> dtoToEntityMapping(){
+    public static BiFunction<Genre, UpdateGenreRequest, Genre> dtoToEntityMapper(){
         return (genre, request) -> {
            genre.setDescription(request.getDescription());
            return genre;

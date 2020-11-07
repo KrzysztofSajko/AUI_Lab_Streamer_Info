@@ -22,7 +22,7 @@ public class GetGenreResponse {
     @ToString.Exclude
     private List<String> games;
 
-    public static Function<Genre, GetGenreResponse> entityToDtoMapping(){
+    public static Function<Genre, GetGenreResponse> entityToDtoMapper(){
         return genre -> GetGenreResponse.builder()
                 .name(genre.getName())
                 .description(genre.getDescription())

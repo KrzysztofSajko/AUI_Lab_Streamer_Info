@@ -22,7 +22,7 @@ public class CreateStreamerRequest {
     @ToString.Exclude
     private List<String> playedGames;
 
-    public static Function<CreateStreamerRequest, Streamer> dtoToEntityMapping(
+    public static Function<CreateStreamerRequest, Streamer> dtoToEntityMapper(
             Function<String, Game> gameFunction
     ){
         return request -> Streamer.builder()

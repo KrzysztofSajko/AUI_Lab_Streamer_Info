@@ -19,7 +19,7 @@ public class UpdateGameRequest {
     private String description;
     private String genre;
 
-    public static BiFunction<Game, UpdateGameRequest, Game> dtoToEntityMapping(
+    public static BiFunction<Game, UpdateGameRequest, Game> dtoToEntityMapper(
             Function<String, Genre> genreFunction
     ){
         return (game, request) -> {

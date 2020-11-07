@@ -32,8 +32,8 @@ public class GameService {
     }
 
     @Transactional
-    public void add(Game game){
-        repository.save(game);
+    public Game create(Game game){
+        return repository.save(game);
     }
 
     @Transactional

@@ -21,7 +21,7 @@ public class GetStreamerResponse {
     @Singular
     @ToString.Exclude
     private List<String> playedGames;
-    public static Function <Streamer, GetStreamerResponse> entityToDtoMapping(){
+    public static Function <Streamer, GetStreamerResponse> entityToDtoMapper(){
         return streamer -> GetStreamerResponse.builder()
                 .name(streamer.getName())
                 .description(streamer.getDescription())

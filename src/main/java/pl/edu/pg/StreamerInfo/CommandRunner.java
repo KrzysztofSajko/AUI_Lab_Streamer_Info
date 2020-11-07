@@ -8,7 +8,6 @@ import pl.edu.pg.StreamerInfo.services.GameService;
 import pl.edu.pg.StreamerInfo.services.GenreService;
 import pl.edu.pg.StreamerInfo.services.StreamerService;
 
-import java.io.Console;
 import java.util.Scanner;
 
 @Component
@@ -93,7 +92,7 @@ public class CommandRunner implements CommandLineRunner {
                                                 .name(name)
                                                 .description(description)
                                                 .build();
-                                        genreService.add(genre);
+                                        genreService.create(genre);
                                     }
                                 }
                                 break;

@@ -27,8 +27,8 @@ public class GenreService {
     }
 
     @Transactional
-    public void add(Genre genre){
-        repository.save(genre);
+    public Genre create(Genre genre){
+        return repository.save(genre);
     }
 
     @Transactional

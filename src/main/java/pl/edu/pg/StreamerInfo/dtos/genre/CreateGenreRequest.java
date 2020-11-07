@@ -16,7 +16,7 @@ public class CreateGenreRequest {
     private String name;
     private String description;
 
-    public static Function<CreateGenreRequest, Genre> dtoToEntityMapping(){
+    public static Function<CreateGenreRequest, Genre> dtoToEntityMapper(){
         return request -> Genre.builder()
                 .name(request.getName())
                 .description(request.getDescription())

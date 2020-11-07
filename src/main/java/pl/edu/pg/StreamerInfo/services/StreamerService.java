@@ -45,8 +45,8 @@ public class StreamerService {
     }
 
     @Transactional
-    public void add(Streamer streamer){
-        repository.save(streamer);
+    public Streamer create(Streamer streamer){
+        return repository.save(streamer);
     }
 
     @Transactional

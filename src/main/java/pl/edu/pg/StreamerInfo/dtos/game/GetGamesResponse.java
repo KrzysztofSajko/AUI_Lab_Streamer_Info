@@ -24,7 +24,6 @@ public class GetGamesResponse {
     @EqualsAndHashCode
     public static class Game{
         private String name;
-        private String abbreviation;
     }
 
     @Singular
@@ -37,7 +36,6 @@ public class GetGamesResponse {
           games.stream()
                   .map(game -> Game.builder()
                           .name(game.getName())
-                          .abbreviation(game.getAbbreviation())
                           .build())
                   .forEach(responseBuilder::game);
           return responseBuilder.build();
