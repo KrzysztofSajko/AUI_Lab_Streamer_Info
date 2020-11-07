@@ -107,6 +107,13 @@ public class CommandRunner implements CommandLineRunner {
                     break;
                 case "exit":
                     break;
+                case "streamer-by-genre":
+                    System.out.println("Enter genre name:");
+                    if (scanner.hasNext()){
+                        var genreName = scanner.nextLine();
+                        streamerService.findAllByGenre(genreName).forEach(streamer -> System.out.println("- " + streamer));
+                    }
+                    break;
                 default:
                     System.out.println("Unknown command.");
             }

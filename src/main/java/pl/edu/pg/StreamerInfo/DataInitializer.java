@@ -10,8 +10,8 @@ import pl.edu.pg.StreamerInfo.services.GenreService;
 import pl.edu.pg.StreamerInfo.services.StreamerService;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class DataInitializer {
@@ -111,16 +111,16 @@ public class DataInitializer {
         var black = Streamer.builder()
                 .name("BlackFireIce")
                 .description("Mostly strategy oriented games, e-sports commentator.")
-                .playedGames(new ArrayList<>(
-                        List.of(hs, tft)))
+                .playedGames(new HashSet<>(
+                        Set.of(hs, tft)))
                 .build();
         streamerService.add(black);
 
         var jdotb = Streamer.builder()
                 .name("jdotb")
                 .description("World class wow m+ healer, known for showing his chest hair on streams to his audience content.")
-                .playedGames(new ArrayList<>(
-                        List.of(wow)))
+                .playedGames(new HashSet<>(
+                        Set.of(wow)))
                 .build();
         streamerService.add(jdotb);
     }

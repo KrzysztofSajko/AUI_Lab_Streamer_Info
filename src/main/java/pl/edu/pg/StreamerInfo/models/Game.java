@@ -24,5 +24,6 @@ public class Game {
     private Genre genre;
     @ManyToMany(mappedBy = "playedGames")
     @ToString.Exclude
+    @Singular
     private Set<Streamer> streamers;
 }

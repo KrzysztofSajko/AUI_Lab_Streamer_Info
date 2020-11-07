@@ -23,5 +23,6 @@ public class Genre {
     private String description;
     @OneToMany(mappedBy = "genre")
     @ToString.Exclude
+    @Singular
     private List<Game> games;
 }

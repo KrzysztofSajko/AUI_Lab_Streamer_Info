@@ -25,5 +25,6 @@ public class Streamer {
             inverseJoinColumns = @JoinColumn(name = "playedGame")
     )
     @ToString.Exclude
+    @Singular
     private Set<Game> playedGames;
 }

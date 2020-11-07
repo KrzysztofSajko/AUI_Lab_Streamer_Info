@@ -28,8 +28,16 @@ public class StreamerService {
         return repository.findAllByGame(game);
     }
 
+    public List<Streamer> findAllByGame(String gameName){
+        return repository.findAllByGame(gameName);
+    }
+
     public List<Streamer> findAll(Genre genre){
         return repository.findAllByGenre(genre);
+    }
+
+    public List<Streamer> findAllByGenre(String genreName){
+        return repository.findAllByGenre(genreName);
     }
 
     public Optional<Streamer> find(String name){
