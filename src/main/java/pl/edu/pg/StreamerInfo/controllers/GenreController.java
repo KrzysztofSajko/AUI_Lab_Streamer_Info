@@ -11,6 +11,9 @@ import pl.edu.pg.StreamerInfo.dtos.genre.GetGenresResponse;
 import pl.edu.pg.StreamerInfo.dtos.genre.UpdateGenreRequest;
 import pl.edu.pg.StreamerInfo.services.GameService;
 import pl.edu.pg.StreamerInfo.services.GenreService;
+import pl.edu.pg.StreamerInfo.services.StreamerService;
+
+import java.util.HashSet;
 
 
 @RestController
@@ -18,11 +21,13 @@ import pl.edu.pg.StreamerInfo.services.GenreService;
 public class GenreController {
     private GenreService genreService;
     private GameService gameService;
+    private StreamerService streamerService;
 
     @Autowired
-    public GenreController(GenreService genreService, GameService gameService){
+    public GenreController(GenreService genreService, GameService gameService, StreamerService streamerService){
         this.genreService = genreService;
         this.gameService = gameService;
+        this.streamerService = streamerService;
     }
 
     @GetMapping
@@ -77,6 +82,17 @@ public class GenreController {
     public ResponseEntity<Void> deleteGenre(@PathVariable("id") Long id){
         var genre = genreService.find(id);
         if (genre.isPresent()){
+            var games = gameService.findAllByGenre(genre.get());
+            for (var game : games){
+                var streamers = streamerService.findAllByGame(game);
+                for (var streamer : streamers) {
+                    var playedGames = new HashSet<> (gameService.findAllByStreamer(streamer));
+                    playedGames.remove(game);
+                    streamer.setPlayedGames(playedGames);
+                    streamerService.update(streamer);
+                }
+                gameService.delete(game);
+            }
             genreService.delete(genre.get());
             return ResponseEntity.accepted().build();
         }

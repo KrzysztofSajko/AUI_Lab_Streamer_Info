@@ -4,7 +4,9 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -25,5 +27,5 @@ public class Genre {
     @ToString.Exclude
     @Singular
     @EqualsAndHashCode.Exclude
-    private List<Game> games;
+    private Set<Game> games;
 }

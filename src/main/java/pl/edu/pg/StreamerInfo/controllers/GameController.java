@@ -9,9 +9,13 @@ import pl.edu.pg.StreamerInfo.dtos.game.GetGameResponse;
 import pl.edu.pg.StreamerInfo.dtos.game.GetGamesResponse;
 import pl.edu.pg.StreamerInfo.dtos.game.UpdateGameRequest;
 import pl.edu.pg.StreamerInfo.dtos.streamer.GetStreamersResponse;
+import pl.edu.pg.StreamerInfo.models.Game;
 import pl.edu.pg.StreamerInfo.services.GameService;
 import pl.edu.pg.StreamerInfo.services.GenreService;
 import pl.edu.pg.StreamerInfo.services.StreamerService;
+
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/games")
@@ -80,6 +84,13 @@ public class GameController {
     public ResponseEntity<Void> deleteGame(@PathVariable("id") long id){
         var game = gameService.find(id);
         if (game.isPresent()){
+            var streamers = streamerService.findAllByGame(game.get());
+            for (var streamer : streamers){
+                var games = new HashSet<>(gameService.findAllByStreamer(streamer));
+                games.remove(game.get());
+                streamer.setPlayedGames(games);
+                streamerService.update(streamer);
+            }
             gameService.delete(game.get());
             return ResponseEntity.accepted().build();
         }
