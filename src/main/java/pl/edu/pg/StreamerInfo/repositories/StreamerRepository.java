@@ -19,6 +19,9 @@ public interface StreamerRepository extends JpaRepository<Streamer, Long> {
     @Query("select s from Streamer s join s.playedGames g where lower(g.name) = lower(:gameName)")
     List<Streamer> findAllByGame(@Param("gameName") String gameName);
 
+    @Query("select s from Streamer s join s.playedGames g where g.id = :gameId")
+    List<Streamer> findAllByGame(@Param("gameId") Long gameId);
+
     @Query("select s from Streamer s join s.playedGames g join g.genre gen where gen = :genre")
     List<Streamer> findAllByGenre(@Param("genre") Genre genre);
 

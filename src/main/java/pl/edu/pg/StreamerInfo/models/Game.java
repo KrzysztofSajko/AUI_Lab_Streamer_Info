@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "games")
 public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue
     private Long id;
     private String name;
     private String abbreviation;

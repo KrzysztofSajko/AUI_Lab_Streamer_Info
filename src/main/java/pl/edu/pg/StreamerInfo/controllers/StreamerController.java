@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import pl.edu.pg.StreamerInfo.dtos.game.GetGamesResponse;
 import pl.edu.pg.StreamerInfo.dtos.streamer.CreateStreamerRequest;
 import pl.edu.pg.StreamerInfo.dtos.streamer.GetStreamerResponse;
 import pl.edu.pg.StreamerInfo.dtos.streamer.GetStreamersResponse;
@@ -36,6 +37,16 @@ public class StreamerController {
                 .map(value -> ResponseEntity.ok(GetStreamerResponse
                         .entityToDtoMapper()
                         .apply(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("{id}/games")
+    public ResponseEntity<GetGamesResponse> getStreamerGames(@PathVariable("id") Long id){
+        return streamerService.find(id)
+                .map(streamer -> ResponseEntity.ok(GetGamesResponse
+                        .entityToDtoMapper()
+                        .apply(gameService
+                                .findAllByStreamer(streamer))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

@@ -27,7 +27,6 @@ public class GetStreamersResponse {
     }
 
     @Singular
-    @ToString.Exclude
     private List<Streamer> streamers;
 
     public static Function<Collection<pl.edu.pg.StreamerInfo.models.Streamer>, GetStreamersResponse> entityToDtoMapper(){

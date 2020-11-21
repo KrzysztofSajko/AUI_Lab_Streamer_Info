@@ -8,19 +8,23 @@ import pl.edu.pg.StreamerInfo.dtos.game.CreateGameRequest;
 import pl.edu.pg.StreamerInfo.dtos.game.GetGameResponse;
 import pl.edu.pg.StreamerInfo.dtos.game.GetGamesResponse;
 import pl.edu.pg.StreamerInfo.dtos.game.UpdateGameRequest;
+import pl.edu.pg.StreamerInfo.dtos.streamer.GetStreamersResponse;
 import pl.edu.pg.StreamerInfo.services.GameService;
 import pl.edu.pg.StreamerInfo.services.GenreService;
+import pl.edu.pg.StreamerInfo.services.StreamerService;
 
 @RestController
 @RequestMapping("api/games")
 public class GameController {
     private GenreService genreService;
     private GameService gameService;
+    private StreamerService streamerService;
 
     @Autowired
-    public GameController(GenreService genreService, GameService gameService){
+    public GameController(GenreService genreService, GameService gameService, StreamerService streamerService){
         this.genreService = genreService;
         this.gameService = gameService;
+        this.streamerService = streamerService;
     }
 
     @GetMapping
@@ -37,6 +41,17 @@ public class GameController {
                         .entityToDtoMapper()
                         .apply(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("{id}/streamers")
+    public ResponseEntity<GetStreamersResponse> getGameStreamers(@PathVariable("id") long id){
+        return gameService.find(id)
+                .map(game -> ResponseEntity.ok(GetStreamersResponse
+                        .entityToDtoMapper()
+                        .apply(streamerService
+                                .findAllByGame(game))))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 
     @PostMapping

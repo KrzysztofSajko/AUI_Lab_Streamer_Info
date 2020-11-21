@@ -2,12 +2,9 @@ package pl.edu.pg.StreamerInfo.dtos.game;
 
 import lombok.*;
 import pl.edu.pg.StreamerInfo.models.Game;
-import pl.edu.pg.StreamerInfo.models.Genre;
-import pl.edu.pg.StreamerInfo.models.Streamer;
 
-import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
 
 @Getter
 @Setter
@@ -21,10 +18,7 @@ public class GetGameResponse {
     private String name;
     private String abbreviation;
     private String description;
-    private Genre genre;
-    @Singular
-    @ToString.Exclude
-    private List<String> streamers;
+    private String genre;
 
     public static Function<Game, GetGameResponse> entityToDtoMapper(){
         return game -> GetGameResponse.builder()
@@ -32,11 +26,7 @@ public class GetGameResponse {
                 .name(game.getName())
                 .abbreviation(game.getAbbreviation())
                 .description(game.getDescription())
-                .genre(game.getGenre())
-                .streamers(game.getStreamers()
-                        .stream()
-                        .map(Streamer::getName)
-                        .collect(Collectors.toList()))
+                .genre(game.getGenre().getName())
                 .build();
     }
 }

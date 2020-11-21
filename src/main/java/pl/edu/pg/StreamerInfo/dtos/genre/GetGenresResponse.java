@@ -27,7 +27,6 @@ public class GetGenresResponse {
     }
 
     @Singular
-    @ToString.Exclude
     private List<Genre> genres;
 
     public static Function<Collection<pl.edu.pg.StreamerInfo.models.Genre>, GetGenresResponse> entityToDtoMapper(){

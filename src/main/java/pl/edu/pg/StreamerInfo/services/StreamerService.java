@@ -24,12 +24,12 @@ public class StreamerService {
         return repository.findAll();
     }
 
-    public List<Streamer> findAll(Game game){
+    public List<Streamer> findAllByGame(Game game){
         return repository.findAllByGame(game);
     }
 
-    public List<Streamer> findAllByGame(String gameName){
-        return repository.findAllByGame(gameName);
+    public List<Streamer> findAllByGame(Long gameId){
+        return repository.findAllByGame(gameId);
     }
 
     public List<Streamer> findAll(Genre genre){

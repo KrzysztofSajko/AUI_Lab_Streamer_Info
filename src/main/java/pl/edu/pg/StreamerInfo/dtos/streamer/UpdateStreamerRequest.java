@@ -18,15 +18,16 @@ import java.util.stream.Collectors;
 @ToString
 @EqualsAndHashCode
 public class UpdateStreamerRequest {
+    private String name;
     private String description;
     @Singular
-    @ToString.Exclude
     private List<String> playedGames;
 
     public static BiFunction<Streamer, UpdateStreamerRequest, Streamer> dtoToEntityMapper(
             Function<String, Game> gameFunction
     ){
         return (streamer, request) -> {
+            streamer.setName(request.getName());
             streamer.setDescription(request.getDescription());
             streamer.setPlayedGames(request.playedGames
                     .stream()

@@ -10,16 +10,39 @@ GET http://localhost:8080/api/streamers
 
 ###
 
-GET http://localhost:8080/api/streamers/17
+GET http://localhost:8080/api/streamers/15
 
 ###
 
-GET http://localhost:8080/api/genres/4
+GET http://localhost:8080/api/streamers/15/games
 
 ###
 
-GET http://localhost:8080/api/games/13
+DELETE http://localhost:8080/api/games/13
 
+###
+
+DELETE http://localhost:8080/api/genres/1
+
+###
+
+GET http://localhost:8080/api/genres/20
+
+###
+
+GET http://localhost:8080/api/genres/1/games
+
+###
+
+GET http://localhost:8080/api/games/69
+
+###
+
+GET http://localhost:8080/api/games/9/streamers
+
+###
+
+GET http://localhost:8080/api/games/35/streamers
 
 ###
 
@@ -28,7 +51,35 @@ Content-Type: application/json
 
 {
   "name": "genre1",
-  "desription": "description description description"
+  "description": "description description description"
 }
 
 ###
+
+PUT http://localhost:8080/api/genres/20
+Content-Type: application/json
+
+{
+  "description": "genre 1 after update"
+}
+
+###
+
+PUT http://localhost:8080/api/streamers/17
+Content-Type: application/json
+
+{
+  "playedGames" : [
+    "Hearthstone",
+    "Among Us",
+    "World of Warcraft"
+  ]
+}
+
+###
+
+DELETE http://localhost:8080/api/streamers/17
+
+###
+
+DELETE http://localhost:8080/api/genres/18

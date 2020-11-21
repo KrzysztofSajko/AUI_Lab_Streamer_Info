@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import pl.edu.pg.StreamerInfo.dtos.game.GetGamesResponse;
 import pl.edu.pg.StreamerInfo.dtos.genre.CreateGenreRequest;
 import pl.edu.pg.StreamerInfo.dtos.genre.GetGenreResponse;
 import pl.edu.pg.StreamerInfo.dtos.genre.GetGenresResponse;
 import pl.edu.pg.StreamerInfo.dtos.genre.UpdateGenreRequest;
+import pl.edu.pg.StreamerInfo.services.GameService;
 import pl.edu.pg.StreamerInfo.services.GenreService;
 
 
@@ -15,10 +17,12 @@ import pl.edu.pg.StreamerInfo.services.GenreService;
 @RequestMapping("api/genres")
 public class GenreController {
     private GenreService genreService;
+    private GameService gameService;
 
     @Autowired
-    public GenreController(GenreService genreService){
+    public GenreController(GenreService genreService, GameService gameService){
         this.genreService = genreService;
+        this.gameService = gameService;
     }
 
     @GetMapping
@@ -34,6 +38,16 @@ public class GenreController {
                 .map(value -> ResponseEntity.ok(GetGenreResponse
                         .entityToDtoMapper()
                         .apply(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("{id}/games")
+    public  ResponseEntity<GetGamesResponse> getGenreGames(@PathVariable("id") Long id){
+        return genreService.find(id)
+                .map(genre -> ResponseEntity.ok(GetGamesResponse
+                        .entityToDtoMapper()
+                        .apply(gameService
+                                .findAllByGenre(genre))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

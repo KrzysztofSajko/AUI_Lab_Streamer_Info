@@ -19,7 +19,6 @@ public class CreateStreamerRequest {
     private String name;
     private String description;
     @Singular
-    @ToString.Exclude
     private List<String> playedGames;
 
     public static Function<CreateStreamerRequest, Streamer> dtoToEntityMapper(
