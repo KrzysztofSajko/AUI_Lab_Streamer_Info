@@ -18,14 +18,8 @@ import java.util.Set;
 @Table(name = "genres")
 public class Genre {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
-
-    @OneToMany(mappedBy = "genre")
-    @ToString.Exclude
-    @Singular
-    @EqualsAndHashCode.Exclude
-    private Set<Game> games;
 }

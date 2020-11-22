@@ -4,30 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.edu.pg.StreamerInfo.dtos.game.GetGamesResponse;
 import pl.edu.pg.StreamerInfo.dtos.genre.CreateGenreRequest;
 import pl.edu.pg.StreamerInfo.dtos.genre.GetGenreResponse;
 import pl.edu.pg.StreamerInfo.dtos.genre.GetGenresResponse;
 import pl.edu.pg.StreamerInfo.dtos.genre.UpdateGenreRequest;
-import pl.edu.pg.StreamerInfo.services.GameService;
 import pl.edu.pg.StreamerInfo.services.GenreService;
-import pl.edu.pg.StreamerInfo.services.StreamerService;
-
-import java.util.HashSet;
 
 
 @RestController
 @RequestMapping("api/genres")
 public class GenreController {
-    private GenreService genreService;
-    private GameService gameService;
-    private StreamerService streamerService;
+    private final GenreService genreService;
 
     @Autowired
-    public GenreController(GenreService genreService, GameService gameService, StreamerService streamerService){
+    public GenreController(GenreService genreService){
         this.genreService = genreService;
-        this.gameService = gameService;
-        this.streamerService = streamerService;
     }
 
     @GetMapping
@@ -43,16 +34,6 @@ public class GenreController {
                 .map(value -> ResponseEntity.ok(GetGenreResponse
                         .entityToDtoMapper()
                         .apply(value)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("{id}/games")
-    public  ResponseEntity<GetGamesResponse> getGenreGames(@PathVariable("id") Long id){
-        return genreService.find(id)
-                .map(genre -> ResponseEntity.ok(GetGamesResponse
-                        .entityToDtoMapper()
-                        .apply(gameService
-                                .findAllByGenre(genre))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -82,17 +63,6 @@ public class GenreController {
     public ResponseEntity<Void> deleteGenre(@PathVariable("id") Long id){
         var genre = genreService.find(id);
         if (genre.isPresent()){
-            var games = gameService.findAllByGenre(genre.get());
-            for (var game : games){
-                var streamers = streamerService.findAllByGame(game);
-                for (var streamer : streamers) {
-                    var playedGames = new HashSet<> (gameService.findAllByStreamer(streamer));
-                    playedGames.remove(game);
-                    streamer.setPlayedGames(playedGames);
-                    streamerService.update(streamer);
-                }
-                gameService.delete(game);
-            }
             genreService.delete(genre.get());
             return ResponseEntity.accepted().build();
         }
