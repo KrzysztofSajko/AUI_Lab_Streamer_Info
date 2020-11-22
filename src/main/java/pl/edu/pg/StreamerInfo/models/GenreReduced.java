@@ -22,5 +22,5 @@ public class GenreReduced {
     @ToString.Exclude
     @Singular("gameReduced")
     @EqualsAndHashCode.Exclude
-    private Set<GameReduced> gamesReduced;
+    private Set<GameReduced> games;
 }

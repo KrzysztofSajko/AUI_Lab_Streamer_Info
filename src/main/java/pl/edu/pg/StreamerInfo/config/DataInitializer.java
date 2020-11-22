@@ -72,31 +72,31 @@ public class DataInitializer {
         // init games
         var wow = GameReduced.builder()
                 .id(1L)
-                .genreReduced(mmorpg)
+                .genre(mmorpg)
                 .build();
         gameService.create(wow);
 
         var tft = GameReduced.builder()
                 .id(2L)
-                .genreReduced(autoBattler)
+                .genre(autoBattler)
                 .build();
         gameService.create(tft);
 
         var hs = GameReduced.builder()
                 .id(3L)
-                .genreReduced(cardGame)
+                .genre(cardGame)
                 .build();
         gameService.create(hs);
 
         var tesSkyrim = GameReduced.builder()
                 .id(4L)
-                .genreReduced(rpg)
+                .genre(rpg)
                 .build();
         gameService.create(tesSkyrim);
 
         var amongUs = GameReduced.builder()
                 .id(5L)
-                .genreReduced(socialDeductionGame)
+                .genre(socialDeductionGame)
                 .build();
         gameService.create(amongUs);
 

@@ -21,7 +21,7 @@ public class GameReduced {
     @ManyToOne
     @JoinColumn(name = "genre")
     @EqualsAndHashCode.Exclude
-    private GenreReduced genreReduced;
+    private GenreReduced genre;
 
     @ManyToMany(mappedBy = "playedGames")
     @ToString.Exclude

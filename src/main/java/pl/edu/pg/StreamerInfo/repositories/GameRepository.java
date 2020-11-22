@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface GameRepository extends JpaRepository<GameReduced, Long> {
-    @Query("select g from GameReduced g where g.genreReduced = :genre")
+    @Query("select g from GameReduced g where g.genre = :genre")
     List<GameReduced> findAllByGenre(@Param("genre")GenreReduced genreReduced);
 
     @Query("select g from GameReduced g join g.streamers s where s = :streamer")

@@ -22,7 +22,7 @@ public class CreateGameRequest {
     ){
         return request -> GameReduced.builder()
                 .id(request.getId())
-                .genreReduced(genreFunction.apply(request.getGenreId()))
+                .genre(genreFunction.apply(request.getGenreId()))
                 .build();
     }
 }
