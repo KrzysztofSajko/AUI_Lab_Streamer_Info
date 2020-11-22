@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pl.edu.pg</groupId>
-    <artifactId>aui-lab-streamer-info</artifactId>
+    <artifactId>aui-lab-streamerReduced-info</artifactId>
     <version>1</version>
-    <name>aui-lab-streamer-info</name>
-    <description>Lab assignment: streamer info</description>
+    <name>aui-lab-streamerReduced-info</name>
+    <description>Lab assignment: streamerReduced info</description>
 
     <properties>
         <java.version>11</java.version>

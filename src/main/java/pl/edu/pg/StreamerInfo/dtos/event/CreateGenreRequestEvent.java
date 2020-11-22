@@ -13,11 +13,11 @@ import java.util.function.Function;
 @ToString
 @EqualsAndHashCode
 public class CreateGenreRequestEvent {
-    private String name;
+    private Long id;
 
     public static Function<Genre, CreateGenreRequestEvent> entityToDtoMapper(){
-        return request -> CreateGenreRequestEvent.builder()
-                .name(request.getName())
+        return genre -> CreateGenreRequestEvent.builder()
+                .id(genre.getId())
                 .build();
     }
 }
