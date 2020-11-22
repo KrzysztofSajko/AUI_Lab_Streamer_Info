@@ -26,7 +26,7 @@ public class GetGameResponse {
                 .name(game.getName())
                 .abbreviation(game.getAbbreviation())
                 .description(game.getDescription())
-                .genre(game.getGenre().getName())
+                .genre(game.getGenreReduced().getName())
                 .build();
     }
 }

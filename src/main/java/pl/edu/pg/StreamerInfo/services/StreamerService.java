@@ -3,8 +3,8 @@ package pl.edu.pg.StreamerInfo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pg.StreamerInfo.models.Game;
-import pl.edu.pg.StreamerInfo.models.Genre;
-import pl.edu.pg.StreamerInfo.models.Streamer;
+import pl.edu.pg.StreamerInfo.models.GenreReduced;
+import pl.edu.pg.StreamerInfo.models.StreamerReduced;
 import pl.edu.pg.StreamerInfo.repositories.StreamerRepository;
 
 import javax.transaction.Transactional;
@@ -13,49 +13,41 @@ import java.util.Optional;
 
 @Service
 public class StreamerService {
-    private StreamerRepository repository;
+    private final StreamerRepository repository;
 
     @Autowired
     public StreamerService(StreamerRepository repository){
         this.repository = repository;
     }
 
-    public List<Streamer> findAll(){
+    public List<StreamerReduced> findAll(){
         return repository.findAll();
     }
 
-    public List<Streamer> findAllByGame(Game game){
+    public List<StreamerReduced> findAllByGame(Game game){
         return repository.findAllByGame(game);
     }
 
-    public List<Streamer> findAllByGame(Long gameId){
-        return repository.findAllByGame(gameId);
+    public List<StreamerReduced> findAll(GenreReduced genreReduced){
+        return repository.findAllByGenre(genreReduced);
     }
 
-    public List<Streamer> findAll(Genre genre){
-        return repository.findAllByGenre(genre);
-    }
-
-    public List<Streamer> findAllByGenre(String genreName){
-        return repository.findAllByGenre(genreName);
-    }
-
-    public Optional<Streamer> find(Long id){
+    public Optional<StreamerReduced> find(Long id){
         return repository.findById(id);
     }
 
     @Transactional
-    public Streamer create(Streamer streamer){
-        return repository.save(streamer);
+    public StreamerReduced create(StreamerReduced streamerReduced){
+        return repository.save(streamerReduced);
     }
 
     @Transactional
-    public void update(Streamer streamer){
-        repository.save(streamer);
+    public void update(StreamerReduced streamerReduced){
+        repository.save(streamerReduced);
     }
 
     @Transactional
-    public void delete(Streamer streamer){
-        repository.delete(streamer);
+    public void delete(StreamerReduced streamerReduced){
+        repository.delete(streamerReduced);
     }
 }

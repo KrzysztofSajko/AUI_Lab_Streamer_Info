@@ -16,12 +16,9 @@ import java.util.Set;
 @EqualsAndHashCode
 @Entity
 @Table(name = "genres")
-public class Genre {
+public class GenreReduced {
     @Id
-    @GeneratedValue
     private Long id;
-    private String name;
-    private String description;
 
     @OneToMany(mappedBy = "genre")
     @ToString.Exclude

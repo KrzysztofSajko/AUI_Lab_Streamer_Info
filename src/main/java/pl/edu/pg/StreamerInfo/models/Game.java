@@ -2,6 +2,7 @@ package pl.edu.pg.StreamerInfo.models;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLInsert;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Table(name = "games")
 public class Game {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String abbreviation;
@@ -25,11 +26,11 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "genre")
     @EqualsAndHashCode.Exclude
-    private Genre genre;
+    private GenreReduced genreReduced;
 
     @ManyToMany(mappedBy = "playedGames")
     @ToString.Exclude
-    @Singular
+    @Singular("streamerReduced")
     @EqualsAndHashCode.Exclude
-    private Set<Streamer> streamers;
+    private Set<StreamerReduced> streamersReduced;
 }

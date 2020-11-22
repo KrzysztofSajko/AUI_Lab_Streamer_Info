@@ -1,7 +1,7 @@
 package pl.edu.pg.StreamerInfo.dtos.genre;
 
 import lombok.*;
-import pl.edu.pg.StreamerInfo.models.Genre;
+import pl.edu.pg.StreamerInfo.models.GenreReduced;
 
 import java.util.function.Function;
 
@@ -13,13 +13,11 @@ import java.util.function.Function;
 @ToString
 @EqualsAndHashCode
 public class CreateGenreRequest {
-    private String name;
-    private String description;
+    private Long id;
 
-    public static Function<CreateGenreRequest, Genre> dtoToEntityMapper(){
-        return request -> Genre.builder()
-                .name(request.getName())
-                .description(request.getDescription())
+    public static Function<CreateGenreRequest, GenreReduced> dtoToEntityMapper(){
+        return request -> GenreReduced.builder()
+                .id(request.getId())
                 .build();
     }
 }

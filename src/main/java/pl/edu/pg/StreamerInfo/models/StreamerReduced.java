@@ -14,12 +14,10 @@ import java.util.Set;
 @EqualsAndHashCode
 @Entity
 @Table(name = "streamers")
-public class Streamer {
+public class StreamerReduced {
     @Id
-    @GeneratedValue
     private Long id;
-    private String name;
-    private String description;
+
     @ManyToMany
     @JoinTable(
             name = "streamed_games",
