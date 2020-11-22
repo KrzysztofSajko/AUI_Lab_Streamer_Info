@@ -13,17 +13,17 @@ import java.util.Optional;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
-    @Query("select g from Game g where g.genreReduced = :genre")
+    @Query("select g from Game g where g.genre = :genre")
     List<Game> findAllByGenre(@Param("genre")GenreReduced genreReduced);
 
     Optional<Game> findByName(String name);
 
-    @Query("select g from Game g join g.streamersReduced s where s = :streamer")
+    @Query("select g from Game g join g.streamers s where s = :streamer")
     List<Game> findAllByStreamer(@Param("streamer") StreamerReduced streamerReduced);
 
-    @Query("select g from Game g join g.streamersReduced s where g.id = :id and s.id = :streamerId")
+    @Query("select g from Game g join g.streamers s where g.id = :id and s.id = :streamerId")
     Optional<Game> findByIdAndStreamerId(@Param("id") Long id, @Param("streamerId") Long streamerId);
 
-    @Query("select g from Game g where g.id = :id and g.genreReduced.id = :genreId")
+    @Query("select g from Game g where g.id = :id and g.genre.id = :genreId")
     Optional<Game> findByIdAndGenreId(@Param("id") Long id, @Param("genreId") Long genreId);
 }

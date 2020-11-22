@@ -26,11 +26,11 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "genre")
     @EqualsAndHashCode.Exclude
-    private GenreReduced genreReduced;
+    private GenreReduced genre;
 
     @ManyToMany(mappedBy = "playedGames")
     @ToString.Exclude
     @Singular("streamerReduced")
     @EqualsAndHashCode.Exclude
-    private Set<StreamerReduced> streamersReduced;
+    private Set<StreamerReduced> streamers;
 }

@@ -76,7 +76,7 @@ public class DataInitializer {
         var wow = Game.builder()
                 .name("World of Warcraft")
                 .abbreviation("wow")
-                .genreReduced(mmorpg)
+                .genre(mmorpg)
                 .description("A mmorpg set in Warcraft lore which gives players various pvp and pve activities.")
                 .build();
         gameService.create(wow);
@@ -84,7 +84,7 @@ public class DataInitializer {
         var tft = Game.builder()
                 .name("Teamfight Tactics")
                 .abbreviation("tft")
-                .genreReduced(autoBattler)
+                .genre(autoBattler)
                 .description("Auto Battler with LoL characters.")
                 .build();
         gameService.create(tft);
@@ -92,7 +92,7 @@ public class DataInitializer {
         var hs = Game.builder()
                 .name("Hearthstone")
                 .abbreviation("hs")
-                .genreReduced(cardGame)
+                .genre(cardGame)
                 .description("Card game where players create decks using cards from their collection with both pvp and pve modes.")
                 .build();
         gameService.create(hs);
@@ -100,7 +100,7 @@ public class DataInitializer {
         var tesSkyrim = Game.builder()
                 .name("The Elder Scrolls V: Skyrim")
                 .abbreviation("skyrim")
-                .genreReduced(rpg)
+                .genre(rpg)
                 .description("Another game in the series of The Elder Scrolls, this time placed in the province of Skyrim.")
                 .build();
         gameService.create(tesSkyrim);
@@ -108,7 +108,7 @@ public class DataInitializer {
         var amongUs = Game.builder()
                 .name("Among Us")
                 .abbreviation("among")
-                .genreReduced(socialDeductionGame)
+                .genre(socialDeductionGame)
                 .description("Among the crew there are impostors, crewmates have to find out who they are and get rid of them or try to finish their task before all of them get murdered.")
                 .build();
         gameService.create(amongUs);

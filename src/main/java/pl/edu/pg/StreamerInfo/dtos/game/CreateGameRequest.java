@@ -26,7 +26,7 @@ public class CreateGameRequest {
                 .name(request.getName())
                 .abbreviation(request.getAbbreviation())
                 .description(request.getDescription())
-                .genreReduced(genreFunction.apply(request.getGenre()))
+                .genre(genreFunction.apply(request.getGenre()))
                 .build();
     }
 }

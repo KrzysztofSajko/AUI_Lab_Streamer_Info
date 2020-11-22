@@ -51,8 +51,9 @@ public class GameService {
 
     @Transactional
     public Game create(Game game){
+        var result = repository.save(game);
         eventRepository.create(game);
-        return repository.save(game);
+        return result;
     }
 
     @Transactional

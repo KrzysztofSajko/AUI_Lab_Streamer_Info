@@ -18,7 +18,7 @@ public class GetGameResponse {
     private String name;
     private String abbreviation;
     private String description;
-    private String genre;
+    private Long genreId;
 
     public static Function<Game, GetGameResponse> entityToDtoMapper(){
         return game -> GetGameResponse.builder()
@@ -26,7 +26,7 @@ public class GetGameResponse {
                 .name(game.getName())
                 .abbreviation(game.getAbbreviation())
                 .description(game.getDescription())
-                .genre(game.getGenreReduced().getName())
+                .genreId(game.getGenre().getId())
                 .build();
     }
 }
