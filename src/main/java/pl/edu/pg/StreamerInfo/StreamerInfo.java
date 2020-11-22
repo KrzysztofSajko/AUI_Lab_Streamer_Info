@@ -30,15 +30,15 @@ public class StreamerInfo {
                         .uri(genresUrl))
                 .route("games", r -> r.host("localhost:8080")
                         .and()
-                        .path("/api/games", "/api/game/**",
-                                "/api/genres/{id}/games", "/api/genres/{id}/games/**",
-                                "/api/streamers/{id}/games", "/api/streamers/{id}/games/**")
+                        .path("/api/games", "/api/games/**",
+                                "/api/genres/{genreId}/games", "/api/genres/{genreId}/games/**",
+                                "/api/streamers/{streamerId}/games", "/api/streamers/{streamerId}/games/**")
                         .uri(gamesUrl))
                 .route("streamers", r -> r.host("localhost:8080")
                         .and()
                         .path("/api/streamers", "/api/streamers/**",
-                                "/api/genres/{id}/streamers", "/api/genres/{id}/streamers/**",
-                                "/api/games/{id}/streamers", "/api/games/{id}/streamers/**")
+                                "/api/genres/{genreId}/streamers", "/api/genres/{genreId}/streamers/**",
+                                "/api/games/{gameId}/streamers", "/api/games/{gameId}/streamers/**")
                         .uri(streamersUrl))
                 .build();
     }

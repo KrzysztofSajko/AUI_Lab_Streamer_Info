@@ -22,11 +22,11 @@ DELETE http://localhost:8080/api/games/13
 
 ###
 
-DELETE http://localhost:8080/api/genres/1
+DELETE http://localhost:8080/api/genres/9
 
 ###
 
-GET http://localhost:8080/api/genres/20
+GET http://localhost:8080/api/genres/9
 
 ###
 
@@ -56,11 +56,11 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/api/genres/20
+PUT http://localhost:8080/api/genres/9
 Content-Type: application/json
 
 {
-  "description": "genre 1 after update"
+  "description": "genreReduced 1 after update"
 }
 
 ###
