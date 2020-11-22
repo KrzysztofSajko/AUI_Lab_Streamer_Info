@@ -1,7 +1,7 @@
 package pl.edu.pg.StreamerInfo.dtos.streamer;
 
 import lombok.*;
-import pl.edu.pg.StreamerInfo.models.Game;
+import pl.edu.pg.StreamerInfo.models.GameReduced;
 import pl.edu.pg.StreamerInfo.models.Streamer;
 
 
@@ -21,10 +21,10 @@ public class UpdateStreamerRequest {
     private String name;
     private String description;
     @Singular
-    private List<String> playedGames;
+    private List<Long> playedGames;
 
     public static BiFunction<Streamer, UpdateStreamerRequest, Streamer> dtoToEntityMapper(
-            Function<String, Game> gameFunction
+            Function<Long, GameReduced> gameFunction
     ){
         return (streamer, request) -> {
             streamer.setName(request.getName());

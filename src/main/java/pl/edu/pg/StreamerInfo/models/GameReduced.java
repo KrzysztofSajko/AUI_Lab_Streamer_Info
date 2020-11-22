@@ -14,18 +14,14 @@ import java.util.Set;
 @EqualsAndHashCode
 @Entity
 @Table(name = "games")
-public class Game {
+public class GameReduced {
     @Id
-    @GeneratedValue
     private Long id;
-    private String name;
-    private String abbreviation;
-    private String description;
 
     @ManyToOne
     @JoinColumn(name = "genre")
     @EqualsAndHashCode.Exclude
-    private Genre genre;
+    private GenreReduced genreReduced;
 
     @ManyToMany(mappedBy = "playedGames")
     @ToString.Exclude

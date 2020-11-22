@@ -1,8 +1,8 @@
 package pl.edu.pg.StreamerInfo.dtos.game;
 
 import lombok.*;
-import pl.edu.pg.StreamerInfo.models.Game;
-import pl.edu.pg.StreamerInfo.models.Genre;
+import pl.edu.pg.StreamerInfo.models.GameReduced;
+import pl.edu.pg.StreamerInfo.models.GenreReduced;
 
 import java.util.function.Function;
 
@@ -14,19 +14,15 @@ import java.util.function.Function;
 @ToString
 @EqualsAndHashCode
 public class CreateGameRequest {
-    private String name;
-    private String abbreviation;
-    private String description;
-    private String genre;
+    private Long id;
+    private Long genreId;
 
-    public static Function<CreateGameRequest, Game> dtoToEntityMapper(
-            Function<String, Genre> genreFunction
+    public static Function<CreateGameRequest, GameReduced> dtoToEntityMapper(
+            Function<Long, GenreReduced> genreFunction
     ){
-        return request -> Game.builder()
-                .name(request.getName())
-                .abbreviation(request.getAbbreviation())
-                .description(request.getDescription())
-                .genre(genreFunction.apply(request.getGenre()))
+        return request -> GameReduced.builder()
+                .id(request.getId())
+                .genreReduced(genreFunction.apply(request.getGenreId()))
                 .build();
     }
 }

@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "streamers")
 public class Streamer {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
@@ -29,5 +29,5 @@ public class Streamer {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Singular
-    private Set<Game> playedGames;
+    private Set<GameReduced> playedGames;
 }

@@ -2,8 +2,8 @@ package pl.edu.pg.StreamerInfo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.pg.StreamerInfo.models.Game;
-import pl.edu.pg.StreamerInfo.models.Genre;
+import pl.edu.pg.StreamerInfo.models.GameReduced;
+import pl.edu.pg.StreamerInfo.models.GenreReduced;
 import pl.edu.pg.StreamerInfo.models.Streamer;
 import pl.edu.pg.StreamerInfo.repositories.StreamerRepository;
 
@@ -24,20 +24,28 @@ public class StreamerService {
         return repository.findAll();
     }
 
-    public List<Streamer> findAllByGame(Game game){
-        return repository.findAllByGame(game);
+    public List<Streamer> findAllByGame(GameReduced gameReduced){
+        return repository.findAllByGame(gameReduced);
     }
 
     public List<Streamer> findAllByGame(Long gameId){
         return repository.findAllByGame(gameId);
     }
 
-    public List<Streamer> findAll(Genre genre){
-        return repository.findAllByGenre(genre);
+    public List<Streamer> findAll(GenreReduced genreReduced){
+        return repository.findAllByGenre(genreReduced);
     }
 
-    public List<Streamer> findAllByGenre(String genreName){
-        return repository.findAllByGenre(genreName);
+    public List<Streamer> findAllByGenre(Long id){
+        return repository.findAllByGenreId(id);
+    }
+
+    public Optional<Streamer> findByIdAndGenreId(Long streamerId, Long genreId){
+        return repository.findAllByIdAndGenreId(streamerId, genreId);
+    }
+
+    public Optional<Streamer> findByIdAndGameId(Long streamerId, Long gameId){
+        return repository.findAllByIdAndGameId(streamerId, gameId);
     }
 
     public Optional<Streamer> find(Long id){

@@ -2,8 +2,8 @@ package pl.edu.pg.StreamerInfo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.pg.StreamerInfo.models.Game;
-import pl.edu.pg.StreamerInfo.models.Genre;
+import pl.edu.pg.StreamerInfo.models.GameReduced;
+import pl.edu.pg.StreamerInfo.models.GenreReduced;
 import pl.edu.pg.StreamerInfo.models.Streamer;
 import pl.edu.pg.StreamerInfo.repositories.GameRepository;
 
@@ -13,43 +13,36 @@ import java.util.Optional;
 
 @Service
 public class GameService {
-    private GameRepository repository;
+    private final GameRepository repository;
 
     @Autowired
-    public GameService(GameRepository repository){
-        this.repository = repository;
+    public GameService(GameRepository gameRepository){
+        this.repository = gameRepository;
     }
 
-    public List<Game> findAll(){
+    public List<GameReduced> findAll(){
         return repository.findAll();
     }
 
-    public List<Game> findAllByGenre(Genre genre){
-        return repository.findAllByGenre(genre);
-    }
-
-    public List<Game> findAllByStreamer(Streamer streamer){
-        return repository.findAllByStreamer(streamer);
-    }
-
-    public Optional<Game> find(Long id){
+    public Optional<GameReduced> find(Long id){
         return repository.findById(id);
     }
 
-    public Optional<Game> find(String name) { return repository.findByName(name);}
+    public List<GameReduced> findAll(Streamer streamer){
+        return repository.findAllByStreamer(streamer);
+    }
+
+    public List<GameReduced> findAll(GenreReduced genre){
+        return repository.findAllByGenre(genre);
+    }
 
     @Transactional
-    public Game create(Game game){
+    public GameReduced create(GameReduced game){
         return repository.save(game);
     }
 
     @Transactional
-    public void update(Game game){
-        repository.save(game);
-    }
-
-    @Transactional
-    public void delete(Game game){
+    public void delete(GameReduced game){
         repository.delete(game);
     }
 }

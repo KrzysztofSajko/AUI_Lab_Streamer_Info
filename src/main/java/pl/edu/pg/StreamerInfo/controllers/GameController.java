@@ -5,88 +5,44 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.edu.pg.StreamerInfo.dtos.game.CreateGameRequest;
-import pl.edu.pg.StreamerInfo.dtos.game.GetGameResponse;
-import pl.edu.pg.StreamerInfo.dtos.game.GetGamesResponse;
-import pl.edu.pg.StreamerInfo.dtos.game.UpdateGameRequest;
-import pl.edu.pg.StreamerInfo.dtos.streamer.GetStreamersResponse;
-import pl.edu.pg.StreamerInfo.models.Game;
 import pl.edu.pg.StreamerInfo.services.GameService;
 import pl.edu.pg.StreamerInfo.services.GenreService;
 import pl.edu.pg.StreamerInfo.services.StreamerService;
 
 import java.util.HashSet;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/games")
 public class GameController {
-    private GenreService genreService;
-    private GameService gameService;
-    private StreamerService streamerService;
+    private final GameService gameService;
+    private final GenreService genreService;
+    private final StreamerService streamerService;
 
     @Autowired
-    public GameController(GenreService genreService, GameService gameService, StreamerService streamerService){
-        this.genreService = genreService;
+    public GameController(GameService gameService, GenreService genreService, StreamerService streamerService){
         this.gameService = gameService;
+        this.genreService = genreService;
         this.streamerService = streamerService;
     }
 
-    @GetMapping
-    public ResponseEntity<GetGamesResponse> getGames(){
-        return ResponseEntity.ok(GetGamesResponse
-                .entityToDtoMapper()
-                .apply(gameService.findAll()));
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<GetGameResponse> getGame(@PathVariable("id") long id){
-        return gameService.find(id)
-                .map(value -> ResponseEntity.ok(GetGameResponse
-                        .entityToDtoMapper()
-                        .apply(value)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("{id}/streamers")
-    public ResponseEntity<GetStreamersResponse> getGameStreamers(@PathVariable("id") long id){
-        return gameService.find(id)
-                .map(game -> ResponseEntity.ok(GetStreamersResponse
-                        .entityToDtoMapper()
-                        .apply(streamerService
-                                .findAllByGame(game))))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-
-    }
-
-    @PostMapping
-    public ResponseEntity<Void> createGame(@RequestBody CreateGameRequest request, UriComponentsBuilder builder){
-        var game = CreateGameRequest
-                .dtoToEntityMapper(name -> genreService.find(name).orElseThrow()).apply(request);
-        game = gameService.create(game);
+    @PostMapping("")
+    public ResponseEntity<Void> create(@RequestBody CreateGameRequest request, UriComponentsBuilder builder){
+        var game = CreateGameRequest.dtoToEntityMapper(
+                genreId -> genreService.find(genreId)
+                        .orElseThrow())
+                .apply(request);
+        gameService.create(game);
         return ResponseEntity.created(builder.pathSegment("api", "games", "{id}")
-                .buildAndExpand(game.getName()).toUri()).build();
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity<Void> updateGame(@RequestBody UpdateGameRequest request, @PathVariable("id") long id){
-        var game = gameService.find(id);
-        if (game.isPresent()){
-            UpdateGameRequest.dtoToEntityMapper(name -> genreService.find(name).orElseThrow()).apply(game.get(), request);
-            gameService.update(game.get());
-            return ResponseEntity.accepted().build();
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
+                .buildAndExpand(game.getId()).toUri()).build();
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteGame(@PathVariable("id") long id){
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id){
         var game = gameService.find(id);
-        if (game.isPresent()){
+        if(game.isPresent()){
             var streamers = streamerService.findAllByGame(game.get());
             for (var streamer : streamers){
-                var games = new HashSet<>(gameService.findAllByStreamer(streamer));
+                var games = new HashSet<>(gameService.findAll(streamer));
                 games.remove(game.get());
                 streamer.setPlayedGames(games);
                 streamerService.update(streamer);

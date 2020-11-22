@@ -4,8 +4,6 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -16,16 +14,13 @@ import java.util.Set;
 @EqualsAndHashCode
 @Entity
 @Table(name = "genres")
-public class Genre {
+public class GenreReduced {
     @Id
-    @GeneratedValue
     private Long id;
-    private String name;
-    private String description;
 
     @OneToMany(mappedBy = "genre")
     @ToString.Exclude
-    @Singular
+    @Singular("gameReduced")
     @EqualsAndHashCode.Exclude
-    private Set<Game> games;
+    private Set<GameReduced> gamesReduced;
 }
