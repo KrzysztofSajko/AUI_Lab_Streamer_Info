@@ -128,13 +128,13 @@ public class DataInitializer {
 
         var sco = StreamerReduced.builder()
                 .id(3L)
-                .playedGames(new HashSet<>(Set.of(wow)))
+                .playedGames(new HashSet<>(Set.of(wow, tesSkyrim)))
                 .build();
         streamerService.create(sco);
 
         var jorbs = StreamerReduced.builder()
                 .id(4L)
-                .playedGames(new HashSet<>(Set.of(amongUs, hs)))
+                .playedGames(new HashSet<>(Set.of(tft, amongUs, hs)))
                 .build();
         streamerService.create(jorbs);
     }
