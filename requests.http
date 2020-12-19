@@ -1,48 +1,32 @@
-GET http://localhost:8080/api/games
+GET http://localhost:8080/api/genres/1/games/1
 
 ###
 
-GET http://localhost:8080/api/genres
+GET http://localhost:8080/api/games/1/streamers
 
 ###
 
-GET http://localhost:8080/api/streamers
+GET http://localhost:8080/actuator/gateway/routes
 
 ###
 
-GET http://localhost:8080/api/streamers/15
+GET http://localhost:8080/api/genres/1/streamers
 
 ###
 
-GET http://localhost:8080/api/streamers/15/games
+GET http://localhost:8080/api/genres/
 
 ###
 
-DELETE http://localhost:8080/api/games/13
+GET http://localhost:8080/api/streamers/4
 
 ###
 
-DELETE http://localhost:8080/api/genres/9
+GET http://localhost:8080/api/streamers/4/games
 
 ###
 
-GET http://localhost:8080/api/genres/9
-
-###
-
-GET http://localhost:8080/api/genres/1/games
-
-###
-
-GET http://localhost:8080/api/games/69
-
-###
-
-GET http://localhost:8080/api/games/9/streamers
-
-###
-
-GET http://localhost:8080/api/games/35/streamers
+GET http://localhost:8080/api/games/1
 
 ###
 
@@ -56,30 +40,21 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:8080/api/genres/1
+
+###
+
 PUT http://localhost:8080/api/genres/9
 Content-Type: application/json
 
 {
-  "description": "genreReduced 1 after update"
+  "description": "genre 1 after update"
 }
 
 ###
 
-PUT http://localhost:8080/api/streamers/17
-Content-Type: application/json
-
-{
-  "playedGames" : [
-    "Hearthstone",
-    "Among Us",
-    "World of Warcraft"
-  ]
-}
+DELETE http://localhost:8080/api/genres/1
 
 ###
 
-DELETE http://localhost:8080/api/streamers/17
-
-###
-
-DELETE http://localhost:8080/api/genres/18
+DELETE http://localhost:8080/api/genres/1
