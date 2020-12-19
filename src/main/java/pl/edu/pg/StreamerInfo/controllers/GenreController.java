@@ -50,6 +50,7 @@ public class GenreController {
                 }
                 gameService.delete(game);
             }
+            genreService.delete(genre.get());
             return ResponseEntity.accepted().build();
         } else {
             return ResponseEntity.notFound().build();

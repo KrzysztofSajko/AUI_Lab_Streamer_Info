@@ -104,28 +104,28 @@ public class DataInitializer {
         var black = Streamer.builder()
                 .name("BlackFireIce")
                 .description("Mostly strategy oriented games, e-sports commentator.")
-                .playedGames(new HashSet<>(Set.of()))
+                .playedGames(new HashSet<>(Set.of(tft, hs)))
                 .build();
         streamerService.create(black);
 
         var jdotb = Streamer.builder()
                 .name("jdotb")
                 .description("World class wow m+ healer, known for showing his chest hair on streams to his audience content.")
-                .playedGames(new HashSet<>(Set.of()))
+                .playedGames(new HashSet<>(Set.of(wow)))
                 .build();
         streamerService.create(jdotb);
 
         var sco = Streamer.builder()
                 .name("Sco")
                 .description("World class tank, multiple R2WF winner, gm of Method guild and founder of Method gaming org.")
-                .playedGames(new HashSet<>(Set.of()))
+                .playedGames(new HashSet<>(Set.of(wow, tesSkyrim)))
                 .build();
         streamerService.create(sco);
 
         var jorbs = Streamer.builder()
                 .name("Jorbs")
                 .description("Big brain dude, 200 iq plays are a norm for him")
-                .playedGames(new HashSet<>(Set.of()))
+                .playedGames(new HashSet<>(Set.of(tft, amongUs, hs)))
                 .build();
         streamerService.create(jorbs);
     }
