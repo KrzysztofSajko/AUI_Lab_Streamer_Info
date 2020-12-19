@@ -20,7 +20,7 @@ public class GenreEventRepository {
     public GenreEventRepository(@Value("${streamer-info.streamers.url}") String streamersUrl,
                                 @Value("${streamer-info.games.url}") String gamesUrl){
         restTemplates.add(new RestTemplateBuilder().rootUri(streamersUrl).build());
-        restTemplates.add(new RestTemplateBuilder().rootUri(gamesUrl).build());
+//        restTemplates.add(new RestTemplateBuilder().rootUri(gamesUrl).build());
     }
 
     public void delete(Genre genre){

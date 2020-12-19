@@ -33,7 +33,9 @@ public class GenreService {
 
     @Transactional
     public Genre create(Genre genre){
-        return repository.save(genre);
+        var result = repository.save(genre);
+        eventRepository.create(genre);
+        return result;
     }
 
     @Transactional

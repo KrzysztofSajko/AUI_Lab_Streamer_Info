@@ -43,7 +43,7 @@ public class GenreController {
                 .dtoToEntityMapper().apply(request);
         genre = genreService.create(genre);
         return ResponseEntity.created(builder.pathSegment("api", "genres", "{id}")
-        .buildAndExpand(genre.getName()).toUri()).build();
+        .buildAndExpand(genre.getId()).toUri()).build();
     }
 
     @PutMapping("{id}")
